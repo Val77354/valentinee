@@ -151,14 +151,12 @@ button {
   100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
 }
 
-/* FINAL MESSAGE STYLING */
 #message { 
     display:none; 
     margin-top:10px; 
+    font-size: 20px;
     animation: pop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
-#message h3 { font-family: 'Dancing Script', cursive; font-size: 28px; margin-bottom: 10px; color: #fff; }
-#message p { font-size: 16px; line-height: 1.5; font-weight: 300; }
 
 @keyframes pop{0%{transform:scale(0.5);opacity:0;}100%{transform:scale(1);opacity:1;}}
 
@@ -187,6 +185,7 @@ button {
 
   <div id="gameplay-area">
       <h1>FINAL BOSS: VALENTINE</h1>
+      <h2>Defeat the heart to win its love!</h2>
       <div class="hp-container">
         <div class="hp-bar" id="hpBar"></div>
       </div>
@@ -197,10 +196,9 @@ button {
   </div>
 
   <div id="message">
-    <h3>GOTCHA! 💖</h3>
-    <p>Nice try, but no matter what you answer...<br>
-    <b>YOU ARE MY VALENTINE!</b></p>
-    <p style="font-size: 12px; margin-top: 10px; opacity: 0.8;">Boss Defeated. Love Captured Forever.</p>
+    🎉 NEW PARTNER ADDED TO WORLD! 💖<br>
+    You defeated the final boss Valentine!<br><br>
+    <span style="font-size: 16px; font-weight: bold;">(No matter what you answered... you were always going to be mine! 💘)</span>
   </div>
 </div>
 
@@ -216,7 +214,7 @@ const heartWrapper = document.getElementById("heartWrapper");
 let bossHP = 100;
 let yesScale = 1;
 
-const emotionalTexts = ["STILL A NO?!", "YOU'RE COLD!", "OUCH! 💔", "I'M TRYING MY BEST", "STOP IT!!", "LOVE ME!", "MERCY!"];
+const emotionalTexts = ["DONT U LOVE ME?!", "WHY U DO THIS?", "OUCH! 💔", "RUDE! 😤", "STOP IT!!", "MY HEART...", "HAVE MERCY!"];
 
 function triggerDamage(event) {
   bossHP -= 20;
@@ -251,9 +249,8 @@ function win() {
   gameplayArea.style.display="none";
   message.style.display="block";
   bigBossHeart.style.fill = "#ff0055";
-  bigBossHeart.style.filter = "drop-shadow(0 0 25px #ff0055)";
   heartWrapper.style.animation = "pulseLayer 0.4s infinite"; 
-  launchConfetti(300); // Massive confetti
+  launchConfetti(300); 
 }
 
 noBtn.addEventListener("click", triggerDamage);
