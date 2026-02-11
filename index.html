@@ -43,6 +43,37 @@ body {
 h1 { font-size:28px; margin-bottom:10px; letter-spacing:1px;}
 h2 { font-weight:400; font-size:18px; opacity:0.9; line-height:1.4; margin-bottom:20px;}
 
+/* BIG BOSS HEART SECTION */
+.boss-heart-container {
+  position: relative;
+  margin: 20px auto;
+  width: 100px;
+}
+.boss-label {
+  font-family: 'Dancing Script', cursive;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #fff;
+  margin-bottom: 5px;
+  text-shadow: 0 0 10px #ff4d6d;
+}
+#bigBossHeart {
+  font-size: 80px;
+  display: inline-block;
+  transition: transform 0.2s;
+  filter: drop-shadow(0 0 15px #ff4d6d);
+}
+.shake-heart {
+  animation: heartDamage 0.4s ease;
+}
+@keyframes heartDamage {
+  0% { transform: scale(1.2) rotate(0deg); filter: brightness(2) drop-shadow(0 0 30px red); }
+  25% { transform: scale(1) rotate(-10deg); }
+  75% { transform: scale(1) rotate(10deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
 /* HEARTS DISPLAY */
 #topHearts {
   margin-bottom: 15px;
@@ -142,16 +173,20 @@ button {
 
 <body>
 
-<!-- Music -->
 <audio autoplay loop>
   <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
 </audio>
 
 <div class="card">
   <h1>FINAL BOSS: VALENTINE 💘</h1>
+  
+  <div class="boss-heart-container">
+    <div class="boss-label">MY HEART</div>
+    <div id="bigBossHeart">💖</div>
+  </div>
+
   <h2>Dear player,<br>Defeat the final boss to unlock your reward!</h2>
 
-  <!-- Hearts Display -->
   <div id="topHearts">
     <span>💖</span>
     <span>💖</span>
@@ -181,6 +216,7 @@ const noBtn = document.getElementById("noBtn");
 const message = document.getElementById("message");
 const hpBar = document.getElementById("hpBar");
 const topHearts = document.querySelectorAll("#topHearts span");
+const bigBossHeart = document.getElementById("bigBossHeart");
 
 let bossHP = 100;
 let yesScale = 1;
@@ -191,6 +227,11 @@ noBtn.addEventListener("click", ()=>{
   bossHP -= 20;
   if(bossHP<0) bossHP=0;
   hpBar.style.width = bossHP + "%";
+
+  // Big Boss Heart Damage Effect
+  bigBossHeart.classList.remove("shake-heart");
+  void bigBossHeart.offsetWidth; // trigger reflow
+  bigBossHeart.classList.add("shake-heart");
 
   // YES grows
   yesScale += 0.2;
@@ -217,6 +258,7 @@ noBtn.addEventListener("click", ()=>{
   if(bossHP ===0){
     document.querySelector(".buttons").style.display="none";
     message.style.display="block";
+    bigBossHeart.innerHTML = "💝";
     launchConfetti();
   }
 });
@@ -231,6 +273,7 @@ yesBtn.addEventListener("click",()=>{
   });
   document.querySelector(".buttons").style.display="none";
   message.style.display="block";
+  bigBossHeart.innerHTML = "💝";
   launchConfetti();
 });
 
