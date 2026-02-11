@@ -43,13 +43,23 @@ body {
 h1 { font-size:28px; margin-bottom:10px; letter-spacing:1px;}
 h2 { font-weight:400; font-size:18px; opacity:0.9; line-height:1.4; margin-bottom:20px;}
 
+/* HEARTS DISPLAY */
+#topHearts {
+  margin-bottom: 15px;
+}
+#topHearts span {
+  font-size: 28px;
+  margin: 0 3px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
 /* HP BAR */
 .hp-container {
   background: rgba(255,255,255,0.2);
   border-radius: 20px;
   overflow: hidden;
   height: 20px;
-  margin: 20px auto;
+  margin: 10px auto 20px auto;
   max-width: 300px;
 }
 .hp-bar {
@@ -125,6 +135,7 @@ button {
   .card{padding:30px 20px;}
   #message{font-size:18px;}
   .hp-container{max-width:250px;}
+  #topHearts span{font-size:24px;}
 }
 </style>
 </head>
@@ -139,6 +150,15 @@ button {
 <div class="card">
   <h1>FINAL BOSS: VALENTINE 💘</h1>
   <h2>Dear player,<br>Defeat the final boss to unlock your reward!</h2>
+
+  <!-- Hearts Display -->
+  <div id="topHearts">
+    <span>💖</span>
+    <span>💖</span>
+    <span>💖</span>
+    <span>💖</span>
+    <span>💖</span>
+  </div>
 
   <div class="hp-container">
     <div class="hp-bar" id="hpBar"></div>
@@ -160,28 +180,41 @@ const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const message = document.getElementById("message");
 const hpBar = document.getElementById("hpBar");
+const topHearts = document.querySelectorAll("#topHearts span");
 
-let bossHP = 100; // Final boss HP %
+let bossHP = 100;
 let yesScale = 1;
 
-// NO button = damage final boss & YES grows
-noBtn.addEventListener("click", () => {
+// NO click = boss takes damage, YES grows, hearts damaged
+noBtn.addEventListener("click", ()=>{
   // Boss HP decreases
-  bossHP -= 10;
-  if (bossHP < 0) bossHP = 0;
+  bossHP -= 20;
+  if(bossHP<0) bossHP=0;
   hpBar.style.width = bossHP + "%";
 
-  // YES button grows
+  // YES grows
   yesScale += 0.2;
   yesBtn.style.transform = `scale(${yesScale})`;
 
-  // Move NO randomly
-  const x = Math.random()*150 - 75;
-  const y = Math.random()*150 - 75;
+  // NO dodges
+  const x = Math.random()*150-75;
+  const y = Math.random()*150-75;
   noBtn.style.transform = `translate(${x}px,${y}px)`;
 
-  // If boss defeated
-  if(bossHP === 0){
+  // Damage hearts
+  const fullHearts = Math.ceil(bossHP / 20);
+  topHearts.forEach((heart,i)=>{
+    if(i>=fullHearts){
+      heart.style.opacity = "0.3";
+      heart.style.transform = "scale(0.8) rotate(-15deg)";
+    }else{
+      heart.style.opacity="1";
+      heart.style.transform="scale(1) rotate(0deg)";
+    }
+  });
+
+  // Boss defeated
+  if(bossHP ===0){
     document.querySelector(".buttons").style.display="none";
     message.style.display="block";
     launchConfetti();
@@ -190,9 +223,13 @@ noBtn.addEventListener("click", () => {
 
 // YES clicked directly
 yesBtn.addEventListener("click",()=>{
-  document.querySelector(".buttons").style.display="none";
   bossHP = 0;
   hpBar.style.width = "0%";
+  topHearts.forEach(h=>{
+    h.style.opacity="0.3";
+    h.style.transform="scale(0.8) rotate(-15deg)";
+  });
+  document.querySelector(".buttons").style.display="none";
   message.style.display="block";
   launchConfetti();
 });
@@ -201,16 +238,17 @@ yesBtn.addEventListener("click",()=>{
 setInterval(()=>{
   const heart = document.createElement("div");
   heart.className="heart";
-  heart.innerHTML="💗";
+  const emojis = ["💗","💖","💘","❤️"];
+  heart.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
   heart.style.left=Math.random()*100+"vw";
   heart.style.fontSize=Math.random()*20+14+"px";
   document.body.appendChild(heart);
   setTimeout(()=>heart.remove(),6000);
-},500);
+},400);
 
 // Confetti
 function launchConfetti(){
-  for(let i=0;i<80;i++){
+  for(let i=0;i<100;i++){
     const conf=document.createElement("div");
     conf.className="confetti";
     conf.style.left=Math.random()*100+"vw";
@@ -220,6 +258,5 @@ function launchConfetti(){
   }
 }
 </script>
-
 </body>
 </html>
