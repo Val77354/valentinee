@@ -113,7 +113,7 @@ body {
 }
 
 /* FANCY BUTTONS */
-.buttons { display:flex; flex-direction: column; align-items: center; gap:15px;}
+.buttons { display:flex; flex-direction: column; align-items: center; gap:15px; min-height: 120px; position: relative;}
 button {
   border:none;
   border-radius:999px;
@@ -121,14 +121,13 @@ button {
   width: 100%;
   font-size:18px;
   cursor:pointer;
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s, box-shadow 0.2s;
   position: relative;
-  overflow: hidden;
+  touch-action: manipulation;
 }
 
-/* Tactile Click Animation */
 button:active {
-  transform: scale(0.9) !important;
+  transform: scale(0.8) !important;
 }
 
 #yesBtn { 
@@ -147,16 +146,10 @@ button:active {
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
-/* Button "Ghost" Dodge Effect */
-.btn-ghost {
-  position: absolute;
-  pointer-events: none;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.5);
-  animation: ghostFade 0.4s ease-out forwards;
-}
-@keyframes ghostFade {
-  to { transform: scale(1.2); opacity: 0; }
+/* Fade Out Effect */
+.fade-out {
+  opacity: 0;
+  transform: scale(0.5);
 }
 
 /* Message Popups */
@@ -247,10 +240,13 @@ const heartWrapper = document.getElementById("heartWrapper");
 
 let bossHP = 100;
 let yesScale = 1;
+let isMoving = false;
 
 const emotionalTexts = ["DONT U LOVE ME?!", "WHY U DO THIS?", "OUCH! 💔", "RUDE! 😤", "STOP IT!!", "MY HEART...", "HAVE MERCY!"];
 
 function triggerDamage(event) {
+  if (isMoving && event.target === noBtn) return; // Prevent double trigger during animation
+
   bossHP -= 20;
   if(bossHP < 0) bossHP = 0;
   hpBar.style.width = bossHP + "%";
@@ -264,36 +260,32 @@ function triggerDamage(event) {
   yesScale += 0.25;
   yesBtn.style.transform = `scale(${yesScale})`;
   
-  // NO Button "Dodge" Effect
-  createButtonGhost(noBtn);
-  const x = Math.random()*160-80;
-  const y = Math.random()*160-80;
-  noBtn.style.transform = `translate(${x}px,${y}px)`;
+  // NO Button Blink & Teleport Logic
+  if (event.target === noBtn) {
+    isMoving = true;
+    noBtn.classList.add('fade-out');
+    
+    setTimeout(() => {
+        const x = Math.random()*180-90;
+        const y = Math.random()*180-90;
+        noBtn.style.transform = `translate(${x}px,${y}px)`;
+        noBtn.classList.remove('fade-out');
+        isMoving = false;
+    }, 200);
+  }
 
-  // Cry Text
+  // Cry Text Positioned exactly where the click happened
   const cry = document.createElement("div");
   cry.className = "cry-text";
   cry.innerText = emotionalTexts[Math.floor(Math.random()*emotionalTexts.length)];
-  const clientX = event.clientX || window.innerWidth / 2;
-  const clientY = event.clientY || window.innerHeight / 2;
+  const clientX = event.clientX || (window.innerWidth / 2);
+  const clientY = event.clientY || (window.innerHeight / 2);
   cry.style.left = (clientX - 50) + "px";
   cry.style.top = (clientY - 20) + "px";
   document.body.appendChild(cry);
   setTimeout(()=>cry.remove(), 800);
 
   if(bossHP === 0) win();
-}
-
-function createButtonGhost(btn) {
-    const rect = btn.getBoundingClientRect();
-    const ghost = document.createElement("div");
-    ghost.className = "btn-ghost";
-    ghost.style.width = rect.width + "px";
-    ghost.style.height = rect.height + "px";
-    ghost.style.left = rect.left + "px";
-    ghost.style.top = rect.top + "px";
-    document.body.appendChild(ghost);
-    setTimeout(() => ghost.remove(), 400);
 }
 
 function win() {
