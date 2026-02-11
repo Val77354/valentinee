@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Final Boss Valentine 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 
 <style>
 * { box-sizing: border-box; font-family: 'Poppins', sans-serif; margin:0; padding:0;}
@@ -12,7 +13,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(-45deg,#ff9a9e,#fad0c4,#fbc2eb,#a1c4fd);
+  background: linear-gradient(-45deg,#ff758c,#ff7eb3,#fbc2eb,#a1c4fd);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
   overflow: hidden;
@@ -24,176 +25,172 @@ body {
   100%{background-position:0% 50%;}
 }
 
-/* Card */
+/* Sophisticated Floral Corners */
+.flower-corner {
+  position: absolute;
+  font-size: 50px;
+  z-index: 1;
+  opacity: 0.8;
+  pointer-events: none;
+}
+.tl { top: 10px; left: 10px; transform: rotate(-15deg); }
+.tr { top: 10px; right: 10px; transform: rotate(15deg); }
+.bl { bottom: 10px; left: 10px; transform: rotate(-165deg); }
+.br { bottom: 10px; right: 10px; transform: rotate(165deg); }
+
+/* Card Styling */
 .card {
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(18px);
-  border-radius: 30px;
-  padding: 40px 30px;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 40px;
+  padding: 30px 20px;
+  max-width: 380px;
+  width: 85%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   text-align: center;
   position: relative;
-  z-index:2;
-  border: 1px solid rgba(255,255,255,0.3);
+  z-index:10;
+  border: 2px solid rgba(255,255,255,0.4);
 }
 
-/* Text */
-h1 { font-size:28px; margin-bottom:10px; letter-spacing:1px;}
-h2 { font-weight:400; font-size:18px; opacity:0.9; line-height:1.4; margin-bottom:20px;}
+h1 { font-size:24px; margin-bottom:10px; letter-spacing:1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);}
+h2 { font-weight:400; font-size:16px; opacity:0.9; line-height:1.4; margin-bottom:15px;}
 
-/* BIG BOSS HEART SECTION */
+/* BOSS HEART SECTION */
 .boss-heart-container {
   position: relative;
-  margin: 20px auto;
-  width: 100px;
+  margin: 10px auto;
 }
 .boss-label {
   font-family: 'Dancing Script', cursive;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 3px;
+  font-size: 22px;
   color: #fff;
-  margin-bottom: 5px;
-  text-shadow: 0 0 10px #ff4d6d;
+  margin-bottom: -10px;
+  text-shadow: 0 0 15px #ff4d6d;
 }
 #bigBossHeart {
-  font-size: 80px;
+  font-size: 90px;
   display: inline-block;
   transition: transform 0.2s;
-  filter: drop-shadow(0 0 15px #ff4d6d);
+  filter: drop-shadow(0 0 20px #ff4d6d);
+  cursor: pointer;
 }
 .shake-heart {
   animation: heartDamage 0.4s ease;
 }
 @keyframes heartDamage {
-  0% { transform: scale(1.2) rotate(0deg); filter: brightness(2) drop-shadow(0 0 30px red); }
-  25% { transform: scale(1) rotate(-10deg); }
-  75% { transform: scale(1) rotate(10deg); }
-  100% { transform: scale(1) rotate(0deg); }
-}
-
-/* HEARTS DISPLAY */
-#topHearts {
-  margin-bottom: 15px;
-}
-#topHearts span {
-  font-size: 28px;
-  margin: 0 3px;
-  transition: transform 0.3s, opacity 0.3s;
+  0% { transform: scale(1.3); filter: brightness(2) drop-shadow(0 0 40px red); }
+  25% { transform: rotate(-15deg); }
+  75% { transform: rotate(15deg); }
+  100% { transform: scale(1); }
 }
 
 /* HP BAR */
 .hp-container {
-  background: rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.2);
   border-radius: 20px;
   overflow: hidden;
-  height: 20px;
-  margin: 10px auto 20px auto;
-  max-width: 300px;
+  height: 18px;
+  margin: 15px auto;
+  width: 90%;
+  border: 1px solid rgba(255,255,255,0.3);
 }
 .hp-bar {
   height:100%;
   width:100%;
-  background: #ff4d6d;
+  background: linear-gradient(90deg, #ff0055, #ff4d6d);
   transition: width 0.4s ease;
+  box-shadow: 0 0 10px #ff4d6d;
 }
 
 /* Buttons */
-.buttons { display:flex; justify-content:center; gap:20px; flex-wrap:wrap;}
+.buttons { display:flex; flex-direction: column; align-items: center; gap:15px; margin-top: 10px;}
 button {
   border:none;
   border-radius:999px;
-  padding:16px 36px;
+  padding: 14px 0;
+  width: 100%;
   font-size:18px;
   cursor:pointer;
   transition: all 0.3s ease;
   box-shadow:0 6px 15px rgba(0,0,0,0.2);
-  position:relative;
 }
 #yesBtn {
   background:#ff4d6d;
   color:white;
   font-weight:bold;
+  z-index: 11;
 }
-#yesBtn:hover { transform: scale(1.1); box-shadow:0 10px 25px rgba(255,77,109,0.6);}
 #noBtn {
   background:white;
   color:#ff4d6d;
   font-weight:bold;
+  z-index: 12;
 }
-#noBtn:hover { transform: translateY(-5px) rotate(-3deg); box-shadow:0 8px 20px rgba(255,77,109,0.4);}
 
-/* Final message */
+/* Emotional Message Bubbles */
+.cry-text {
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  background: rgba(255, 77, 109, 0.9);
+  padding: 5px 12px;
+  border-radius: 15px;
+  pointer-events: none;
+  animation: flyOut 1s ease-out forwards;
+  white-space: nowrap;
+  z-index: 100;
+}
+@keyframes flyOut {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+}
+
+/* Background Hearts Denser */
+.heart-bg {
+  position:absolute;
+  pointer-events: none;
+  animation: floatUp 5s linear infinite;
+  z-index: 2;
+}
+@keyframes floatUp {
+  0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+  20% { opacity: 0.6; }
+  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
 #message {
   display:none;
-  margin-top:25px;
+  margin-top:20px;
   font-size:20px;
   animation: pop 0.6s ease forwards;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 @keyframes pop{0%{transform:scale(0.6);opacity:0;}100%{transform:scale(1);opacity:1;}}
 
-/* Floating Hearts */
-.heart{
-  position:absolute;
-  font-size:20px;
-  animation: floatUp 6s linear infinite;
-}
-@keyframes floatUp{
-  0%{transform:translateY(100vh) scale(0.5) rotate(0deg);opacity:1;}
-  100%{transform:translateY(-10vh) scale(1.2) rotate(360deg);opacity:0;}
-}
+.confetti { position:absolute; width:8px; height:8px; animation: conf 2s linear forwards; z-index: 20;}
+@keyframes conf { to { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
 
-/* Confetti */
-.confetti{
-  position:absolute;
-  width:8px;
-  height:8px;
-  animation: confetti 2s linear forwards;
-}
-@keyframes confetti{
-  from{transform:translateY(0) rotate(0);opacity:1;}
-  to{transform:translateY(100vh) rotate(720deg);opacity:0;}
-}
-
-/* MOBILE */
-@media(max-width:480px){
-  h1{font-size:24px;}
-  h2{font-size:16px;}
-  .buttons{flex-direction:column; gap:15px;}
-  button{width:100%; font-size:18px; padding:14px 0;}
-  .card{padding:30px 20px;}
-  #message{font-size:18px;}
-  .hp-container{max-width:250px;}
-  #topHearts span{font-size:24px;}
-}
 </style>
 </head>
-
 <body>
 
-<audio autoplay loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
-</audio>
+<div class="flower-corner tl">🌸🌺</div>
+<div class="flower-corner tr">🌹🌷</div>
+<div class="flower-corner bl">🌷🌹</div>
+<div class="flower-corner br">🌺🌸</div>
 
 <div class="card">
-  <h1>FINAL BOSS: VALENTINE 💘</h1>
-  
   <div class="boss-heart-container">
-    <div class="boss-label">MY HEART</div>
+    <div class="boss-label">My Heart</div>
     <div id="bigBossHeart">💖</div>
   </div>
 
-  <h2>Dear player,<br>Defeat the final boss to unlock your reward!</h2>
-
-  <div id="topHearts">
-    <span>💖</span>
-    <span>💖</span>
-    <span>💖</span>
-    <span>💖</span>
-    <span>💖</span>
-  </div>
+  <h1>FINAL BOSS: VALENTINE</h1>
+  <h2>Unlock the reward by defeating the Boss!</h2>
 
   <div class="hp-container">
     <div class="hp-bar" id="hpBar"></div>
@@ -205,8 +202,8 @@ button {
   </div>
 
   <div id="message">
-    🎉 NEW PARTNER ADDED TO WORLD! 💖<br>
-    You defeated the final boss Valentine!
+    🎉 VICTORY! 🎉<br>
+    My heart is now yours forever! 💝
   </div>
 </div>
 
@@ -215,86 +212,80 @@ const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const message = document.getElementById("message");
 const hpBar = document.getElementById("hpBar");
-const topHearts = document.querySelectorAll("#topHearts span");
 const bigBossHeart = document.getElementById("bigBossHeart");
 
 let bossHP = 100;
 let yesScale = 1;
 
-// NO click = boss takes damage, YES grows, hearts damaged
-noBtn.addEventListener("click", ()=>{
-  // Boss HP decreases
+const emotionalTexts = [
+  "DONT U LOVE ME?!",
+  "WHY U DO THIS?",
+  "OUCH! 💔",
+  "RUDE! 😤",
+  "STOP IT!!",
+  "MY HEART IS BREAKING",
+  "PLEASE HAVE MERCY"
+];
+
+function triggerDamage(event) {
   bossHP -= 20;
-  if(bossHP<0) bossHP=0;
+  if(bossHP < 0) bossHP = 0;
   hpBar.style.width = bossHP + "%";
 
-  // Big Boss Heart Damage Effect
+  // Big Heart Shake
   bigBossHeart.classList.remove("shake-heart");
-  void bigBossHeart.offsetWidth; // trigger reflow
+  void bigBossHeart.offsetWidth; 
   bigBossHeart.classList.add("shake-heart");
 
-  // YES grows
-  yesScale += 0.2;
+  // Growth & Evasion
+  yesScale += 0.25;
   yesBtn.style.transform = `scale(${yesScale})`;
-
-  // NO dodges
-  const x = Math.random()*150-75;
-  const y = Math.random()*150-75;
+  const x = Math.random()*160-80;
+  const y = Math.random()*160-80;
   noBtn.style.transform = `translate(${x}px,${y}px)`;
 
-  // Damage hearts
-  const fullHearts = Math.ceil(bossHP / 20);
-  topHearts.forEach((heart,i)=>{
-    if(i>=fullHearts){
-      heart.style.opacity = "0.3";
-      heart.style.transform = "scale(0.8) rotate(-15deg)";
-    }else{
-      heart.style.opacity="1";
-      heart.style.transform="scale(1) rotate(0deg)";
-    }
-  });
+  // Floating Emotional Text
+  const cry = document.createElement("div");
+  cry.className = "cry-text";
+  cry.innerText = emotionalTexts[Math.floor(Math.random()*emotionalTexts.length)];
+  cry.style.left = (event.clientX || window.innerWidth/2) + "px";
+  cry.style.top = (event.clientY || window.innerHeight/2) + "px";
+  document.body.appendChild(cry);
+  setTimeout(()=>cry.remove(), 1000);
 
-  // Boss defeated
-  if(bossHP ===0){
-    document.querySelector(".buttons").style.display="none";
-    message.style.display="block";
-    bigBossHeart.innerHTML = "💝";
-    launchConfetti();
-  }
-});
+  if(bossHP === 0) win();
+}
 
-// YES clicked directly
-yesBtn.addEventListener("click",()=>{
-  bossHP = 0;
-  hpBar.style.width = "0%";
-  topHearts.forEach(h=>{
-    h.style.opacity="0.3";
-    h.style.transform="scale(0.8) rotate(-15deg)";
-  });
+function win() {
   document.querySelector(".buttons").style.display="none";
   message.style.display="block";
   bigBossHeart.innerHTML = "💝";
+  bigBossHeart.style.transform = "scale(1.2)";
   launchConfetti();
-});
+}
 
-// Floating hearts
+noBtn.addEventListener("click", triggerDamage);
+yesBtn.addEventListener("click", win);
+
+// Denser Background Hearts & Flowers
 setInterval(()=>{
   const heart = document.createElement("div");
-  heart.className="heart";
-  const emojis = ["💗","💖","💘","❤️"];
-  heart.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+  heart.className="heart-bg";
+  const items = ["💗","💖","💘","❤️","🌸","🌷"];
+  heart.innerHTML=items[Math.floor(Math.random()*items.length)];
   heart.style.left=Math.random()*100+"vw";
-  heart.style.fontSize=Math.random()*20+14+"px";
+  heart.style.fontSize=Math.random()*25+15+"px";
+  heart.style.animationDuration = (Math.random()*3 + 3) + "s";
   document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),6000);
-},400);
+  setTimeout(()=>heart.remove(),5000);
+}, 200); // 200ms for high density
 
-// Confetti
 function launchConfetti(){
   for(let i=0;i<100;i++){
     const conf=document.createElement("div");
     conf.className="confetti";
     conf.style.left=Math.random()*100+"vw";
+    conf.style.top="-10px";
     conf.style.background=`hsl(${Math.random()*360},100%,60%)`;
     document.body.appendChild(conf);
     setTimeout(()=>conf.remove(),2000);
